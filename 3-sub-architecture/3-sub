@@ -1,0 +1,111 @@
+ssh into virtual machine app.
+
+tech501-amir-in-3-subnet-sparta-app-nva
+
+az 2
+ubuntu 22.04 lts
+
+only ssh
+
+dmz subnet.
+
+
+
+2.
+go onto route tables and create
+
+tech501-amir-to-private-subnet-rt
+
+resoruce - settings -- add route - to-private-subnet-route
+destination: via ip addresses
+
+if it doesnt work click or route subnet and check if is assoicated with right subnet. leave on public
+next hop should be virtual appliance and address should be nva 10.0.3.4
+
+go to nva click big link/heading that says ip configurations , click enable ip fowarding box - enabled ip fowarding on azure, now for to enable for linux:
+
+make sure your on nva not app.
+
+ping
+sysctl net.ipv4.ip.ip_foward
+sudo nano /etc/sysctl.conf
+sudo sysctl -p
+uncomment with # "net.ipv6.conf.all.fowarding=1"
+sysctl net.ipv4.ip.ip_foward
+
+
+create a bash script that creates ip table rules for us:
+nano config-ip-tables.sh
+```
+#!/bin/bash
+ 
+# configure iptables
+ 
+echo "Configuring iptables..."
+ 
+# ADD COMMENT ABOUT WHAT THE FOLLOWING COMMAND(S) DO
+sudo iptables -A INPUT -i lo -j ACCEPT
+sudo iptables -A OUTPUT -o lo -j ACCEPT
+ 
+# ADD COMMENT ABOUT WHAT THE FOLLOWING COMMAND(S) DO
+sudo iptables -A INPUT -m state --state ESTABLISHED,RELATED -j ACCEPT
+ 
+# ADD COMMENT ABOUT WHAT THE FOLLOWING COMMAND(S) DO
+sudo iptables -A OUTPUT -m state --state ESTABLISHED -j ACCEPT
+ 
+# ADD COMMENT ABOUT WHAT THE FOLLOWING COMMAND(S) DO
+sudo iptables -A INPUT -m state --state INVALID -j DROP
+ 
+# ADD COMMENT ABOUT WHAT THE FOLLOWING COMMAND(S) DO
+sudo iptables -A INPUT -p tcp --dport 22 -m state --state NEW,ESTABLISHED -j ACCEPT
+sudo iptables -A OUTPUT -p tcp --sport 22 -m state --state ESTABLISHED -j ACCEPT
+ 
+# uncomment the following lines if want allow SSH into NVA only through the public subnet (app VM as a jumpbox)
+# this must be done once the NVA's public IP address is removed
+#sudo iptables -A INPUT -p tcp -s 10.0.2.0/24 --dport 22 -m state --state NEW,ESTABLISHED -j ACCEPT
+#sudo iptables -A OUTPUT -p tcp --sport 22 -m state --state ESTABLISHED -j ACCEPT
+ 
+# uncomment the following lines if want allow SSH to other servers using the NVA as a jumpbox
+# if need to make outgoing SSH connections with other servers from NVA
+#sudo iptables -A OUTPUT -p tcp --dport 22 -m conntrack --ctstate NEW,ESTABLISHED -j ACCEPT
+#sudo iptables -A INPUT -p tcp --sport 22 -m conntrack --ctstate ESTABLISHED -j ACCEPT
+ 
+# ADD COMMENT ABOUT WHAT THE FOLLOWING COMMAND(S) DO
+sudo iptables -A FORWARD -p tcp -s 10.0.2.0/24 -d 10.0.4.0/24 --destination-port 27017 -m tcp -j ACCEPT
+ 
+# ADD COMMENT ABOUT WHAT THE FOLLOWING COMMAND(S) DO
+sudo iptables -A FORWARD -p icmp -s 10.0.2.0/24 -d 10.0.4.0/24 -m state --state NEW,ESTABLISHED -j ACCEPT
+ 
+# ADD COMMENT ABOUT WHAT THE FOLLOWING COMMAND(S) DO
+sudo iptables -P INPUT DROP
+ 
+# ADD COMMENT ABOUT WHAT THE FOLLOWING COMMAND(S) DO
+sudo iptables -P FORWARD DROP
+ 
+echo "Done!"
+echo ""
+ 
+# make iptables rules persistent
+# it will ask for user input by default
+ 
+echo "Make iptables rules persistent..."
+sudo DEBIAN_FRONTEND=noninteractive apt install iptables-persistent -y
+echo "Done!"
+echo ""
+```
+then chmod +x config-tables.sh
+
+
+
+
+go to sparta-app-db nsg and go to inbound rules
+
+add inbound security rule source is 10.0.2.0/24
+service select mongodb destination port 
+3rd destination port is a * (deny), make priority 100 if its 300ssh 310 allowcicdrmongo
+
+
+
+
+
+tech501-amir-in-3-subnet-sparta-app
