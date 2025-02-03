@@ -72,7 +72,7 @@ Basic
 
 -   **Select Image and Select Create VM**: tech501-amir-sparta-app-ready-to-run-db.
 
--   **VM Name**: tech501-amir-in-3-subnet-sparta-app-db
+-   **VM Name**: tech501-amir-in-3-subnet-sparta-app-db-vm
 
 -   **Availability Zone**: Zone 3
 
@@ -110,7 +110,7 @@ Step 3: Deploy the Application VM
 
 -   **Select Image and Select Create VM**: tech501-amir-sparta-test-app-ready-to-run-app
 
--   **VM Name**: tech501-amir-in-3-subnet-sparta-app
+-   **VM Name**: tech501-amir-in-3-subnet-sparta-app-vm
 
 -   **Availability Zone**: Zone 1
 
@@ -182,7 +182,7 @@ Step 5: Deploy the NVA VM
 
 -   No image required for the NVA VM
 
--   **VM Name**: tech501-amir-in-3-subnet-sparta-app-nva
+-   **VM Name**: tech501-amir-in-3-subnet-sparta-app-nva-vm
 
 -   **Availability Zone**: Zone 2
 
@@ -299,7 +299,7 @@ SSH into the NVA VM and run:
 ```
 nano config-ip-tables.sh
 ```
-Refer to [config-script](config-ip-tables.sh) and give executable permissions with `chmod +x config-tables.sh`. 
+Refer to [config-script](config-ip-tables.sh) and give executable permissions with `chmod +x config-ip-tables.sh`. 
 
 As the APP VM sends packets/traffic (ping) to the NVA, everything is getting forwarded on to the DB VM. The IP tables rules filters traffic according to the rules.
 
