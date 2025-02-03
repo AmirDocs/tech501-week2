@@ -60,7 +60,7 @@ Step 1: Setup VNET
 - **Subnets**:
   - **public-subnet**: 10.0.2.0/24 (for the application VM)
   - **private-subnet**: 10.0.4.0/24 (for the database VM, private access only)
-  - **dmz-subnet**: 10.0.4.0/24 (for the NVA VM)
+  - **dmz-subnet**: 10.0.3.0/24 (for the NVA VM)
 * * * * *
 
 Step 2: Deploy the Database VM
