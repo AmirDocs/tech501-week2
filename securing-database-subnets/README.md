@@ -12,6 +12,8 @@ The architecture ensures:
 - The database VM is isolated and accessible only through the NVA.
 - Strict security rules are applied to minimise exposure.
 
+<video controls src="../images/Provision Page Working.mp4" title="Sparta App Provision Page"></video>
+
 ---
 
 ## Key Steps
@@ -249,7 +251,7 @@ If you encounter errors adding routes go to **Settings > Subnets > Associate**
 
 -  **Subnet**: public-subnet
 
-As a result, AP VM will no longer ping.
+<video controls src="../images/VM and Network Settings.mp4" title="VM Settings"></video>
 
 * * * * *
 
