@@ -12,7 +12,7 @@ The architecture ensures:
 - The database VM is isolated and accessible only through the NVA.
 - Strict security rules are applied to minimise exposure.
 
-<video controls src="../images/Provision Page Working.mp4" title="Sparta App Provision Page"></video>
+<video controls src="../images/Provision Page.mp4" title="Provision Page"></video>
 
 ---
 
@@ -157,6 +157,8 @@ Tags
 - **Owner** **Amir**
 
 Review and Create. Check if the public IP works and loads the Sparta Test APP posts page.
+
+<video controls src="../images/VM and Network Settings.mp4" title="VM and Network Configurations"></video>
 * * * * *
 
 Step 4: Test Connectivity Between VMs
