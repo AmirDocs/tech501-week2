@@ -1,6 +1,6 @@
 # Securing the Database with a 3 Subnet Architecture
 
-![Architecture Diagram](../images-videos/Architecture-diagram.png)
+![Architecture Diagram](<../images-videos/Architecture Diagram.png>)
 
 ## Overview
 
@@ -216,6 +216,8 @@ Tags
 - **Owner** **Amir**
 
 Review and Create. Try again if you receive validation failed.
+
+<video controls src="../images-videos/VM and Network Settings.mp4" title="Title"></video>
 
 * * * * *
 
