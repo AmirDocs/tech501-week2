@@ -1,5 +1,7 @@
 # Securing the Database with a 3 Subnet Architecture
 
+![Architecture Diagram](<../images-videos/Architecture Diagram.png>)
+
 ## Overview
 
 This guide outlines the steps to secure your database using a **3-subnet architecture** in Azure. The setup includes:
@@ -12,7 +14,7 @@ The architecture ensures:
 - The database VM is isolated and accessible only through the NVA.
 - Strict security rules are applied to minimise exposure.
 
-<video controls src="../images/Provision Page.mp4" title="Provision Page"></video>
+<video controls src="../images-videos/Provision Page.mp4" title="Title"></video>
 
 ---
 
@@ -158,7 +160,6 @@ Tags
 
 Review and Create. Check if the public IP works and loads the Sparta Test APP posts page.
 
-<video controls src="../images/VM and Network Settings.mp4" title="VM and Network Configurations"></video>
 * * * * *
 
 Step 4: Test Connectivity Between VMs
@@ -216,6 +217,8 @@ Tags
 
 Review and Create. Try again if you receive validation failed.
 
+<video controls src="../images-videos/VM and Network Settings.mp4" title="Title"></video>
+
 * * * * *
 
 Step 6: Configure Route Tables
@@ -253,7 +256,6 @@ If you encounter errors adding routes go to **Settings > Subnets > Associate**
 
 -  **Subnet**: public-subnet
 
-<video controls src="../images/VM and Network Settings.mp4" title="VM Settings"></video>
 
 * * * * *
 
